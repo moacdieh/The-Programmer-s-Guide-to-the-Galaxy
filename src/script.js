@@ -1,6 +1,7 @@
-let img1,img2,img3,monsterImg,monsterImg2;
+let img1,img2,img3,monsterImg,monsterImg2,shieldImg,shieldTokenImg,bossImg;
 let startX,startY;
-let ship;
+let ship,shieldToken,boss;
+let shield = null;
 let bullets = [];
 let monsters = [];
 let monsterTimer = 50;
@@ -10,6 +11,8 @@ let randomYs = [];
 let gameOver = false;
 let font;
 let score = 0;
+let shieldTokenRarity = 500;
+let maxShieldTokenRarity = 500;
 
 function setup() {
 	createCanvas(displayWidth,displayHeight)
@@ -18,12 +21,19 @@ function setup() {
 	img3 = loadImage('media/ship3.png');
 	monsterImg = loadImage('media/monster1.png');
 	monsterImg2 = loadImage('media/monster2.png');
+	shieldImg = loadImage('media/shield.png');
+	shieldTokenImg = loadImage('media/shield_token.png');
+	bossImg = loadImage('media/boss1.png');
+
 	font = loadFont('media/font.ttf');
 
 	startX = displayWidth/2 - 75/2;
 	startY = displayHeight - 200;
 
 	ship = new Ship(startX,startY);
+	shieldToken = new ShieldToken();
+
+	boss = new Boss();
 
 	for(let i = 0; i <= 100 ; i++){
 		randomXs.push(random(0,displayWidth));
@@ -46,16 +56,44 @@ function draw() {
 		bullet.draw();
 		bullet.move();
 	}
-	
+
 	ship.draw();
 	ship.move();
 
+	if (shieldToken !== null){
+		shieldToken.draw();
+		if (shieldToken.duration <= 0){
+			shieldToken = null;
+		}
+	} else {
+		shieldTokenRarity --;
+		if (shieldTokenRarity <= 0){
+			shieldToken = new ShieldToken();
+			shieldTokenRarity = maxShieldTokenRarity;
+		}
+
+	}
+
+	if(shield !== null) {
+		shield.draw();
+		shield.move();
+		fill(0,167,250);
+		textFont(font);
+		textSize(20);
+		text(shield.duration,5,60);
+		if(shield.duration <= 0)shield = null;
+	}
+	
 	for (let i = 0; i < monsters.length; i++) {
 		const monster = monsters[i];
 		monster.draw();
 		monster.move();
 	}
-
+	
+	if(collide(ship,shieldToken)){
+			shieldToken = null;
+			shield = new Shield(ship);
+	}
 
 	for (let i = monsters.length-1; i >= 0; i--) {
 		const monster = monsters[i];
@@ -71,6 +109,11 @@ function draw() {
 			endGame();
 		}
 
+		if(collide(shield,monster)){
+			monsters.splice(i,1);
+			score += monster.score;
+		}
+
 		if(monster.y + monster.height > displayHeight)
 			monsters.splice(i,1);
 	}
@@ -80,6 +123,13 @@ function draw() {
 		monsters.push(new Monster());
 	}
 	monsterTimer--;
+
+
+/*	boss.draw();
+	if(collide(bullets,boss)){
+
+	}*/
+
 
 	if(gameOver){
 		fill(0);
@@ -111,7 +161,9 @@ function keyPressed(){
 }
 
 function collide(a,b){
-	if (a.x < b.x + b.width &&
+
+	if (a !== null && b !== null &&
+		a.x < b.x + b.width &&
 		a.x + a.width > b.x &&
 		a.y < b.y + b.height &&
 		a.y + a.height > b.y) return true;
@@ -128,5 +180,7 @@ function resetGame(){
 		bullets = [];
 		monsters = [];
 		gameOver = false;
+		score = 0;
+		shield = new Shield(ship);
 	}
 }
