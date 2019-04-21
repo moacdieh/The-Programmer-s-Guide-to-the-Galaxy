@@ -181,6 +181,5 @@ function resetGame(){
 		monsters = [];
 		gameOver = false;
 		score = 0;
-		shield = new Shield(ship);
 	}
 }
