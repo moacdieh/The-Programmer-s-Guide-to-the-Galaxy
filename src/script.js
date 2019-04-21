@@ -90,19 +90,22 @@ function draw() {
 		textSize(100);
 		textAlign(CENTER,CENTER);
 		text('GAME OVER',0,-100);
+		textSize(50);
+		text('Press ENTER',0,0);
 		pop();
+	} else {
+		fill(255);
+		textFont(font);
+		textSize(50);
+		text(score,5,40);
 	}
-	fill(255);
-	textFont(font);
-	textSize(50);
-	text(score,5,40);
 }
 
 function keyPressed(){
 	if(keyCode === 32){
 		bullets.push(new Bullet(ship.x + ship.width/2 - 2.5,ship.y));
-		//bullets.push(new Bullet(ship.x + ship.width/2 - 2.5 - 27,ship.y));
-		//bullets.push(new Bullet(ship.x + ship.width/2 - 2.5 + 27,ship.y));
+	} else if(keyCode === ENTER){
+		resetGame();
 	}
 }
 
@@ -116,4 +119,13 @@ function collide(a,b){
 
 function endGame(){
 	gameOver = true;
+}
+
+function resetGame(){
+	if(gameOver){
+		ship = new Ship(startX,startY);
+		bullets = [];
+		monsters = [];
+		gameOver = false;
+	}
 }
