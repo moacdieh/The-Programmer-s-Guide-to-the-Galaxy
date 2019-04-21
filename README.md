@@ -4,7 +4,7 @@ The Programmer's Guide to the Galaxy, a retro space shooter game built on top of
 This is a side project started by myself and a fellow programmer. 
 Our goal is to build a space shooter retro game that will grow with time and have a lot of features.
 
-Product Roadmap
+Roadmap
 ----------------------------------------------------------
 
 Phase 1 (Done)
