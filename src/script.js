@@ -41,6 +41,12 @@ function draw() {
 		if(randomYs[i] > displayHeight) randomYs[i] = 0;
 	}
 
+	for (let i = 0; i < bullets.length; i++) {
+		const bullet = bullets[i];
+		bullet.draw();
+		bullet.move();
+	}
+	
 	ship.draw();
 	ship.move();
 
@@ -50,11 +56,6 @@ function draw() {
 		monster.move();
 	}
 
-	for (let i = 0; i < bullets.length; i++) {
-		const bullet = bullets[i];
-		bullet.draw();
-		bullet.move();
-	}
 
 	for (let i = monsters.length-1; i >= 0; i--) {
 		const monster = monsters[i];
