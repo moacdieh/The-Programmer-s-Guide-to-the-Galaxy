@@ -1,10 +1,10 @@
-# The-Programmer-s-Guide-to-the-Galaxy
+# The-Programmer-s-Guide-to-the-Galaxy [Demo](https://s3.eu-central-1.amazonaws.com/the-programmer-s-guide-to-the-galaxy/index.html)
 The Programmer's Guide to the Galaxy, a retro space shooter game built on top of p5.js with an ambition to grow.
 
 This is a side project started by myself and a fellow programmer. 
 Our goal is to build a space shooter retro game that will grow with time and have a lot of features.
 
-Product Roadmap
+Roadmap
 ----------------------------------------------------------
 
 Phase 1 (Done)
