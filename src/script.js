@@ -11,7 +11,7 @@ let randomYs = [];
 let gameOver = false;
 let font;
 let score = 0;
-let shieldTokenRarity = 500;
+let shieldTokenRarity = 4500;
 let maxShieldTokenRarity = 500;
 
 function setup() {
@@ -28,7 +28,7 @@ function setup() {
 	font = loadFont('media/font.ttf');
 
 	startX = displayWidth/2 - 75/2;
-	startY = displayHeight - 200;
+	startY = displayHeight - 400;
 
 	ship = new Ship(startX,startY);
 	shieldToken = new ShieldToken();
@@ -181,5 +181,6 @@ function resetGame(){
 		monsters = [];
 		gameOver = false;
 		score = 0;
+		shield = null;
 	}
 }
