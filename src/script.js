@@ -4,13 +4,14 @@ let ship,shieldToken,boss;
 let shield = null;
 let bullets = [];
 let monsters = [];
-let monsterTimer = 50;
-let monsterTimerMax = 25;
 let randomXs = [];
 let randomYs = [];
 let gameOver = false;
 let font;
 let score = 0;
+
+let monsterTimer = 50;
+let monsterTimerMax = 15;
 let shieldTokenRarity = 4500;
 let maxShieldTokenRarity = 500;
 
@@ -24,7 +25,6 @@ function setup() {
 	shieldImg = loadImage('media/shield.png');
 	shieldTokenImg = loadImage('media/shield_token.png');
 	bossImg = loadImage('media/boss1.png');
-
 	font = loadFont('media/font.ttf');
 
 	startX = displayWidth/2 - 75/2;
@@ -43,23 +43,28 @@ function setup() {
 }
 
 function draw() {
+	
+	//Stary space 
 	background(0,0,0);
 	for(let i = 0; i <= 100 ; i++){
-		let s = random(1,3);
+		let s = random(1,3); //Twinkle stars
 		rect(randomXs[i],randomYs[i],s,s);
-		randomYs[i] += 5;
+		randomYs[i] += 5; //Stars move forward
 		if(randomYs[i] > displayHeight) randomYs[i] = 0;
 	}
 
+	//Bullets
 	for (let i = 0; i < bullets.length; i++) {
 		const bullet = bullets[i];
 		bullet.draw();
 		bullet.move();
 	}
 
+	//Ship
 	ship.draw();
 	ship.move();
 
+	//ShieldToken
 	if (shieldToken !== null){
 		shieldToken.draw();
 		if (shieldToken.duration <= 0){
@@ -71,9 +76,9 @@ function draw() {
 			shieldToken = new ShieldToken();
 			shieldTokenRarity = maxShieldTokenRarity;
 		}
-
 	}
 
+	//Shield + duration
 	if(shield !== null) {
 		shield.draw();
 		shield.move();
@@ -84,53 +89,16 @@ function draw() {
 		if(shield.duration <= 0)shield = null;
 	}
 	
+	//Monsters
 	for (let i = 0; i < monsters.length; i++) {
 		const monster = monsters[i];
 		monster.draw();
 		monster.move();
 	}
-	
-	if(collide(ship,shieldToken)){
-			shieldToken = null;
-			shield = new Shield(ship);
-	}
 
-	for (let i = monsters.length-1; i >= 0; i--) {
-		const monster = monsters[i];
-		for (let j = bullets.length - 1; j >=0 ; j--) {
-			const bullet = bullets[j];
-			if(collide(bullet,monster)){
-				monsters.splice(i,1);
-				bullets.splice(j,1);
-				score += monster.score;
-			}
-		}
-		if(collide(ship,monster)){
-			endGame();
-		}
+	boss.draw();
 
-		if(collide(shield,monster)){
-			monsters.splice(i,1);
-			score += monster.score;
-		}
-
-		if(monster.y + monster.height > displayHeight)
-			monsters.splice(i,1);
-	}
-	
-	if(monsterTimer == 0){
-		monsterTimer = monsterTimerMax;
-		monsters.push(new Monster());
-	}
-	monsterTimer--;
-
-
-/*	boss.draw();
-	if(collide(bullets,boss)){
-
-	}*/
-
-
+	//Gameover
 	if(gameOver){
 		fill(0);
 		rect(0,0,displayWidth,displayHeight);
@@ -150,13 +118,58 @@ function draw() {
 		textSize(50);
 		text(score,5,40);
 	}
+	
+	//Action: get a shield
+	if(collide(ship,shieldToken)){
+			shieldToken = null;
+			shield = new Shield(ship);
+	}
+
+	//Action: Monster collision checks
+	for (let i = monsters.length-1; i >= 0; i--) {
+		const monster = monsters[i];
+
+		//Monster vs bullet
+		for (let j = bullets.length - 1; j >=0 ; j--) {
+			const bullet = bullets[j];
+			if(collide(bullet,monster)){
+				monsters.splice(i,1);
+				bullets.splice(j,1);
+				score += monster.score;
+			}
+		}
+
+		//Monster vs ship
+		if(collide(ship,monster)){
+			endGame();
+		}
+
+		//Shield vs Monster
+		if(collide(shield,monster)){
+			monsters.splice(i,1);
+			score += monster.score;
+		}
+
+		//Monster out of bounds
+		if(monster.y + monster.height > displayHeight)
+			monsters.splice(i,1);
+	}
+	
+	//Monster generation timer
+	if(monsterTimer == 0){
+		monsterTimer = monsterTimerMax;
+		monsters.push(new Monster());
+	}
+	monsterTimer--;
+
+	
 }
 
 function keyPressed(){
 	if(keyCode === 32){
 		bullets.push(new Bullet(ship.x + ship.width/2 - 2.5,ship.y));
 	} else if(keyCode === ENTER){
-		resetGame();
+			resetGame();
 	}
 }
 
