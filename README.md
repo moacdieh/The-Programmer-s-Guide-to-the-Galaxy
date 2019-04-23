@@ -25,4 +25,5 @@ Open world multiplayer 2D retro space shooter.
 How to run project
 ----------------------------------------------------------
 You need to serve the static files in the src repository.
-You can use the included file server >> node server.js
+You can use the included file server 
+> node server.js
