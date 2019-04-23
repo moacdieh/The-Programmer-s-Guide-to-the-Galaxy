@@ -26,5 +26,5 @@ How to run project
 ----------------------------------------------------------
 You need to serve the static files in the src repository.
 You can use the included file server 
-> cd The-Programmer-s-Guide-to-the-Galaxy
+> cd The-Programmer-s-Guide-to-the-Galaxy</br>
 > node server.js
