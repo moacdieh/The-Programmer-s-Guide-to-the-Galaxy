@@ -19,7 +19,7 @@ Add highscore system with ability to share to social media.
 **Phase 4**
 Add multiplayer support, up to two players with random assignment or room selection.
 
-**Phase**
+**Phase n**
 Open world multiplayer 2D retro space shooter.
 
 How to run project
