@@ -11,7 +11,7 @@ Phase 1 (Done)
 A simple single player survival style space shooter game
 
 Phase 2 (Current)
-A single player survival game with different monsters and add-on weapons such as shield and stronger laser.
+A single player survival game with different monsters and add-on weapons such as shields and stronger lasers.
 
 Phase 3
 Add highscore system with ability to share to social media.
