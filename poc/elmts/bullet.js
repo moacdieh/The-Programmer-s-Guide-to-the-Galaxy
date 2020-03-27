@@ -9,14 +9,12 @@ class Bullet {
 	}
 
 	draw() {
-		pg.fill(255,0,0);
-		pg.rect(this.x,this.y,this.width,this.height);
-		return this;
+		fill(255,0,0);
+		rect(this.x,this.y,this.width,this.height);
 	} 
 
-	update() {
+	move() {
 		this.y -= this.speed;
-		return this;
     }
     
 }

@@ -4,17 +4,7 @@
 	<title>PGG</title>
 	<meta name="mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="	sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132776198-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'UA-132776198-1');
-	</script>
 </head>
 
 <body id="body" class="body"  oncontextmenu="return false;">
@@ -25,16 +15,18 @@
 	</div>
 	<div class="loading" id="loading" style="display: none;"></div>
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-<script type="text/javascript" src="p5.min.js"></script>
-<script type="text/javascript" src="p5.dom.min.js"></script>
-<script type="text/javascript" src="script.js"></script>
-<script type="text/javascript" src="elmts/ship.js"></script>
-<script type="text/javascript" src="elmts/bullet.js"></script>
-<script type="text/javascript" src="elmts/monster.js"></script>
-<script type="text/javascript" src="elmts/shield.js"></script>
-<script type="text/javascript" src="elmts/shieldToken.js"></script>
-<script type="text/javascript" src="elmts/boss.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="lib/p5.min.js"></script>
+	<script type="text/javascript" src="lib/p5.sound.min.js"></script>
+	<script type="text/javascript" src="game/repeater.js"></script>
+	<script type="text/javascript" src="game/main.js"></script>
+	<script type="text/javascript" src="elmts/ship.js"></script>
+	<script type="text/javascript" src="elmts/bullet.js"></script>
+	<script type="text/javascript" src="elmts/monster.js"></script>
+	<script type="text/javascript" src="elmts/shield.js"></script>
+	<script type="text/javascript" src="elmts/shieldToken.js"></script>
+	<script type="text/javascript" src="elmts/space.js"></script>
+	<script type="text/javascript" src="elmts/banner.js"></script>
 
 </body>
 </html>

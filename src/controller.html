@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PGG</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            touch-action: manipulation;
+        }
+        div {
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+
+<body id="body" class="body" oncontextmenu="return false;">
+    <div >
+        <div class="row border" style="height: 100vh;">
+            <div class="col-sm-5 border" style="height: 99vh;">
+                <div class="row border" style="height: 33vh;">
+                    <div class="col-sm-4 border" style="height: 33vh;">
+
+                    </div>
+                    <div ontouchstart="move('up',1)" ontouchcancel="move('up',0)" ontouchend="move('up',0)" class=" col-sm-4 border bg-primary" style="height: 33vh;">
+                        <!-- UP -->
+                    </div>
+                    <div class="col-sm-4 border" style="height: 33vh;">
+
+                    </div>
+                </div>
+                <div class="row border " style="height: 33vh;">
+                    <div ontouchstart="move('left',1)" ontouchend="move('left',0)" ontouchcancel="move('left',0)"  class=" col-sm-4 border bg-primary" style="height: 33vh;">
+                        <!-- LEFT -->
+                    </div>
+                    <div class="col-sm-4 border bg-dark " style="height: 33vh;">
+
+                    </div>
+                    <div ontouchstart="move('right',1)" ontouchcancel="move('right',0)" ontouchend="move('right',0)"  class=" col-sm-4 border bg-primary" style="height: 33vh;">
+                        <!-- RIGHT -->
+                    </div>
+                </div>
+                <div class="row border" style="height: 33vh;">
+                    <div class="col-sm-4 border" style="height: 33vh;">
+
+                    </div>
+                    <div ontouchstart="move('down',1)" ontouchend="move('down',0)" ontouchcancel="move('down',0)" class="  col-sm-4 border bg-primary" style="height: 33vh;">
+                        <!-- DOWN -->
+                    </div>
+                    <div class="col-sm-4 border" style="height: 33vh;">
+
+                    </div>
+                </div>
+            </div>
+            <div  class="col-sm-2 border bg-light" style="height: 99vh;">
+                <div onclick="reset()" class="row border bg-light" style="height: 50vh;"> </div>
+                <div onclick="pause()" class="row border bg-light" style="height: 50vh;"> </div>
+                <!-- SHOOT -->
+            </div>
+            <div ontouchstart="shoot()" class="col-sm-5 border bg-light" style="height: 99vh;">
+                <!-- SHOOT -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+
+    Array.from(document.getElementsByTagName('div')).forEach(div => {
+        div.addEventListener("click", function(event){
+            event.preventDefault()
+        });
+    });
+        let room = prompt()+'';
+        let socket = io();
+        let ship_id = 0;
+
+        socket.emit('register', room);
+
+        function pause(){
+            socket.emit('pause', room);
+        }
+
+        function reset(){
+            socket.emit('reset', room);
+        }
+
+        function shoot() {
+            socket.emit('shoot', room);
+        }
+
+        function move(direction, state) {
+            socket.emit('move',room ,{
+                direction : direction,
+                state : state,
+            });
+        }
+    </script>
+</body>
+
+</html>
