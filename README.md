@@ -31,6 +31,6 @@ You can use the included file server
 
 How to play
 ----------------------------------------------------------
-Open a new room by accessing root url.
-Open /controller.html to connect to the room.
+Open a new room by accessing root url.</br>
+Open /controller.html to connect to the room.</br>
 Control your ship.
